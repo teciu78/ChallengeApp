@@ -12,8 +12,6 @@ if (isFemale)
     {
         Console.WriteLine($"{name}, lat {age}");
     }
-
-
 } 
 else if (!isFemale)
 {
