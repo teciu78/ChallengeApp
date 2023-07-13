@@ -1,17 +1,22 @@
-﻿int number = 4566;
-string numberInString = number.ToString();
-char[] letters= numberInString.ToArray();
-int numberCount;
+﻿using ChallengeApp;
 
-for (int i = 0; i < 10; i++)
+List<Employee> employees = new List<Employee>();    
+
+Employee employee1 = new Employee("Jan", "Kowalski", 41, 89);
+Employee employee2 = new Employee("Artur", "Wiśniewski", 66, 94);
+Employee employee3 = new Employee("Stanisław", "Tym", 85, 100);
+
+employees.Add(employee1);
+employees.Add(employee2);
+employees.Add(employee3);
+
+var maxScore = employees.Max(r => r.score);
+
+foreach (var employee in employees)
 {
-    numberCount = 0;
-    foreach (char letter in letters)
-    {
-        if (letter.ToString() == i.ToString())
-        {
-            numberCount++;
-        }
+	if (employee.score == maxScore)
+	{
+        Console.WriteLine($"Najwięcej, bo aż {employee.score} punktów zdobył {employee.name} {employee.surename}");
     }
-    Console.WriteLine($"{i} => {numberCount}");
 }
+
