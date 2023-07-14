@@ -19,7 +19,7 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenUserLoosesPoints_ShouldReturnSumOfPoints()
+        public void WhenUserLosePoints_ShouldReturnSumOfPoints()
         {
             //arrange
             var user = new User("Witek", "123");
