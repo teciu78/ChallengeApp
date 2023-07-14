@@ -28,13 +28,26 @@ employees.Add(employee1);
 employees.Add(employee2);
 employees.Add(employee3);
 
-var maxScore = employees.Max(r => r.score);
+var maxScore = employees.First(e => e.score == employees.Max(r => r.score));
 
-foreach (var employee in employees)
-{
-	if (employee.score == maxScore)
-	{
-        Console.WriteLine($"Najwięcej, bo aż {employee.score} punktów zdobył {employee.name} {employee.surename}");
-    }
-}
+Console.WriteLine($"Najwięcej, bo aż {maxScore.score} punktów zdobył {maxScore.name} {maxScore.surename}");
+
+User user1 = new User("Jan", "123");
+
+user1.AddScore(10);
+Console.WriteLine($"Wynik: {user1.Result}");
+user1.SubtractScore(5);
+Console.WriteLine($"Wynik: {user1.Result}");
+user1.AddScore(10);
+Console.WriteLine($"Wynik: {user1.Result}");
+
+//var maxScore = employees.Max(r => r.score);
+
+//foreach (var employee in employees)
+//{
+//    if (employee.score == maxScore)
+//    {
+//        Console.WriteLine($"Najwięcej, bo aż {employee.score} punktów zdobył {employee.name} {employee.surename}");
+//    }
+//}
 
