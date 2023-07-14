@@ -14,5 +14,10 @@
             this.age = age;
             this.score = score;
         }
+
+        public void AddScore(int score)
+        {
+            this.score += score;
+        }
     }
 }
