@@ -1,53 +1,164 @@
 ﻿using ChallengeApp;
+using System.Globalization;
 
-List<Employee> employees = new List<Employee>();    
+string name = "";
+string surename = "";
+int age = 0;
+string pointsQuestion= "";
+int count = 0;
+float points = 0f;
+int empNo = 1;
+string exit;
+int pointsNo = 0;
+bool valid = true;
 
-Employee employee1 = new Employee("Jan", "Kowalski", 41, 0);
-Employee employee2 = new Employee("Artur", "Wiśniewski", 66, 0);
-Employee employee3 = new Employee("Stanisław", "Tym", 85, 0);
+List<Employee> employees = new List<Employee>();
 
-employee1.AddScore(10);
-employee1.AddScore(5);
-employee1.AddScore(2);
-employee1.AddScore(7);
-employee1.AddScore(3);
+do
+{
+    Console.Clear();
+    Console.WriteLine("------------------------------");
+    Console.WriteLine($"WPROWADŹ DANE PRACOWNIKA NR: {empNo}");
+    Console.WriteLine("------------------------------");
 
-employee2.AddScore(2);
-employee2.AddScore(4);
-employee2.AddScore(9);
-employee2.AddScore(8);
-employee2.AddScore(3);
+    Console.Write("Podaj imię pracownika: ");
+    name = Console.ReadLine();
 
-employee3.AddScore(10);
-employee3.AddScore(9);
-employee3.AddScore(9);
-employee3.AddScore(10);
-employee3.AddScore(9);
+    do
+    {
+        Console.Write("Podaj nazwisko pracownika: ");
+        surename = Console.ReadLine();
 
-employees.Add(employee1);
-employees.Add(employee2);
-employees.Add(employee3);
+        if (string.IsNullOrEmpty(surename))
+        {
+            Console.WriteLine();
+            Console.WriteLine("Podaj imię pracownika! Spróbuj ponownie.");
+            Console.WriteLine();
+        }
 
-var maxScore = employees.First(e => e.score == employees.Max(r => r.score));
 
-Console.WriteLine($"Najwięcej, bo aż {maxScore.score} punktów zdobył {maxScore.name} {maxScore.surename}");
+    } while (string.IsNullOrEmpty(surename));
 
-User user1 = new User("Jan", "123");
+    valid = true;
+    do
+    {
+        Console.Write("Podaj wiek pracownika: ");
+        try
+        {
+            age = Convert.ToInt32(Console.ReadLine());
+            valid = true;
+        }
+        catch
+        {
+            Console.WriteLine();
+            Console.WriteLine("Podana wartość jest nieprawidłowa! Spróbuj ponownie.");
+            Console.WriteLine();
+            valid = false;
+        }
 
-user1.AddScore(10);
-Console.WriteLine($"Wynik: {user1.Result}");
-user1.SubtractScore(5);
-Console.WriteLine($"Wynik: {user1.Result}");
-user1.AddScore(10);
-Console.WriteLine($"Wynik: {user1.Result}");
+        if (valid && age < 18)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Podany wiek jest nieprawidłowy! Minimalny wiek to 18 lat.");
+            Console.WriteLine();
+            valid = false;
+        }
+    }
+    while (!valid);
 
-//var maxScore = employees.Max(r => r.score);
+    Console.Write("Czy chcesz dodać punkty? (Y/N) ");
+    pointsQuestion = Console.ReadLine();
 
-//foreach (var employee in employees)
-//{
-//    if (employee.score == maxScore)
-//    {
-//        Console.WriteLine($"Najwięcej, bo aż {employee.score} punktów zdobył {employee.name} {employee.surename}");
-//    }
-//}
+    if (pointsQuestion.Equals("Y", StringComparison.OrdinalIgnoreCase))
+    {
+        do
+        {
+            Console.Write("Ile wyników chcesz dodać? ");
+            try
+            {
+                count = Convert.ToInt32(Console.ReadLine());
+                valid = true;
+            }
+            catch
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podana wartość jest nieprawidłowa! Spróbuj ponownie.");
+                Console.WriteLine();
+                valid = false;
+            }
+        }
+        while (!valid);
+
+        employees.Add(new Employee ( name, surename, age));
+
+        pointsNo = 0;
+        points = 0;
+
+        do
+        {
+            pointsNo++;
+
+            valid = true;
+            do
+            {
+                Console.Write($"Podaj wynik nr {pointsNo}: ");
+                try
+                {
+                    points = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture.NumberFormat);
+                    valid = true;
+                }
+                catch
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Podana wartość jest nieprawidłowa! Spróbuj ponownie.");
+                    Console.WriteLine();
+                    valid = false;
+                }
+
+                if (points < -100 || points > 100)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Podana wartość jest nieprawidłowa! Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.");
+                    Console.WriteLine();
+                    valid = false;
+                }
+            }
+            while (!valid);
+
+            var index = employees.FindIndex(x => x.Name == name);
+            employees[index].AddGrade(points);
+
+        }
+        while (pointsNo != count);
+    }
+
+    Console.WriteLine("------------------------------------------------------------------------------------------");
+    Console.WriteLine("LISTA WPROWADZONYCH PRACOWNIKÓW");
+
+    foreach (var employee in employees)
+    {
+        var statistics = employee.GetStatistics();
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine($"Pracownik : {employee.Name} {employee.Surename}, lat {employee.Age}.");
+        Console.WriteLine("------------------------------------------------------------------------------------------");
+        Console.WriteLine($"Suma punktów: {statistics.Sum:N2}");
+        Console.WriteLine($"Minimalny wynik: {statistics.Min:N2}");
+        Console.WriteLine($"Maksymalny wynik: {statistics.Max:N2}");
+        Console.WriteLine($"Średnia punktów: {statistics.Average:N2}");
+    }
+
+    Console.WriteLine("-------------------------------------------");
+    Console.Write("Czy chesz dodać kolejnego pracownika? (Y/N) ");
+    exit = Console.ReadLine();
+    empNo++;
+
+} while (!exit.Equals("N", StringComparison.OrdinalIgnoreCase));
+
+Console.Clear();
+Console.WriteLine("-------------------------------");
+Console.WriteLine("DZIĘKUJĘ ZA WPROWADZENIE DANYCH");
+Console.WriteLine("-------------------------------");
+
+
+
 
