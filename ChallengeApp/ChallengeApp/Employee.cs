@@ -9,6 +9,8 @@
 
         private List<float> grades = new List<float>();
 
+        public bool result = false;
+
         public Employee(string? name, string? surename, int? age)
         {
             Name = name;
@@ -18,8 +20,47 @@
 
         public void AddGrade(float grade)
         {
-            this.grades.Add(grade);
+       
+            if (grade < -100 && grade > 100)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podana wartość jest nieprawidłowa! Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.");
+                Console.WriteLine();
+            }
+            else
+            {
+                this.grades.Add(grade);
+            }
         }
+
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))
+            {
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("Podana wartość jest nieprawidłowa!");
+            }
+        }
+
+        public void AddGrade(int grade)
+        {
+                this.AddGrade((float)grade);
+        }
+
+        public void AddGrade(double grade)
+        {
+                this.AddGrade((float)grade);
+        }
+
+        public void AddGrade(long grade)
+        {
+                this.AddGrade((float)grade);
+        }
+
+
 
         public Statistics GetStatistics()
         {
