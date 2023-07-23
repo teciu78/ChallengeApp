@@ -7,8 +7,5 @@ employee.AddGrade("55");
 employee.AddGrade(3);
 employee.AddGrade(6);
 
-var statistics1 = employee.GetStatisticsUsingForeach();
-var statistics2 = employee.GetStatisticsUsingFor();
-var statistics3 = employee.GetStatisticsUsingDoWhile();
-var statistics4 = employee.GetStatisticsUsingWhile();
+var statistics1 = employee.GetStatistics();
 
