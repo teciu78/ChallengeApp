@@ -36,5 +36,27 @@
             //Assert.AreEqual(43.5f, float.Round(result.Max, 2));
             Assert.That(float.Round(result.Max, 2), Is.EqualTo(43.5f));
         }
+
+        [Test]
+        public void CheckCharGradesValue()
+        {
+            var employee = new Employee("Franek", "Dzbanek", 45);
+            employee.AddGrade('d');
+
+            var result = employee.GetStatistics();
+
+            Assert.That(result.Sum, Is.EqualTo(40f));
+        }        
+        
+        [Test]
+        public void CheckCharGradesAverageValue()
+        {
+            var employee = new Employee("Franek", "Dzbanek", 45);
+            employee.AddGrade(80.4f);
+
+            var result = employee.GetStatistics();
+
+            Assert.That(result.AverageLetter, Is.EqualTo('A'));
+        }
     }
 }
