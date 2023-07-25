@@ -27,9 +27,7 @@
             }
             else
             {
-                Console.WriteLine();
-                Console.WriteLine($"Podana wartość ({grade}) jest nieprawidłowa! Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.");
-                Console.WriteLine();
+                throw new Exception($"\nPodana wartość ({grade}) jest nieprawidłowa. Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.\n");
             }
         }
 
@@ -41,7 +39,7 @@
             }
             else
             {
-                Console.WriteLine("Podana wartość jest nieprawidłowa!");
+                throw new Exception("Podana wartość jest nieprawidłowa");
             }
         }
 
@@ -86,8 +84,7 @@
                     this.grades.Add(20);
                     break;
                 default:
-                    Console.WriteLine("Podana wartość jest nieprawidłowa!");
-                    break;
+                    throw new Exception("Podana wartość jest nieprawidłowa");
             }
             
         }

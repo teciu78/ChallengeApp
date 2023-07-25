@@ -1,6 +1,6 @@
 ﻿using ChallengeApp;
 
-Console.WriteLine("WItamy w programie ChallengeApp do oceny Pracowników");
+Console.WriteLine("Witamy w programie ChallengeApp do oceny pracowników");
 Console.WriteLine("----------------------------------------------------");
 Console.WriteLine();
 
@@ -8,19 +8,32 @@ var employee = new Employee("Franek", "Dzbanek", 45);
 
 while (true)
 {
-    Console.WriteLine("Podaj kolejną ovenę pracownika:");
+    Console.WriteLine("Podaj kolejną ocenę pracownika:");
     var input = Console.ReadLine();
-    if (input == "q")
     {
+        if (input == "q" || input == "Q")
         break;
     }
-    employee.AddGrade(input);
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
 }
 
-var statistics1 = employee.GetStatistics();
+    var statistics1 = employee.GetStatistics();
 
-Console.WriteLine($"Average: {statistics1.Average}");
-Console.WriteLine($"Min: {statistics1.Min}");
-Console.WriteLine($"Max: {statistics1.Max}");
-
+if (!float.IsNaN(statistics1.Average))
+{
+    Console.WriteLine($"\nAverage: {statistics1.Average}");
+    Console.WriteLine($"Min: {statistics1.Min}");
+    Console.WriteLine($"Max: {statistics1.Max}");
+}
+else
+{
+    Console.WriteLine("\nNie zostały wprowadzone żadne dane\n");
+}
 
