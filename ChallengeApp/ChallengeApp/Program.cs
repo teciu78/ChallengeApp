@@ -3,7 +3,25 @@
 Console.WriteLine("\nWitamy w programie ChallengeApp do oceny pracowników");
 Console.WriteLine("----------------------------------------------------");
 
-var employee = new EmployeeInFile("Franek", "Dzbanek");
+var employee = new EmployeeInMemory("Franek", "Dzbanek");
+employee.GradeAdded += EmployeeGradeAdded;
+
+var employee1 = new EmployeeInFile("Franek", "Dzbanek");
+employee1.GradeAdded += EmployeeGradeSaved;
+
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę");
+}
+
+void EmployeeGradeSaved(object sender, EventArgs args)
+{
+    Console.WriteLine("Zapisano nową ocenę");
+}
+
+
+
+
 
 while (true)
 {
@@ -16,6 +34,7 @@ while (true)
     try
     {
         employee.AddGrade(input);
+        employee1.AddGrade(input);
     }
     catch (Exception ex)
     {
