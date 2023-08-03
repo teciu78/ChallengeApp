@@ -6,7 +6,7 @@
         [Test]
         public void SumAddedGradesOfTheEmployee()
         {
-            var employee = new Employee("Franek", "Dzbanek", 45);
+            var employee = new Employee("Franek", "Dzbanek", 45,'S');
             employee.AddGrade(3.5f);
             employee.AddGrade(34.5f);
             employee.AddGrade(43.5f);
@@ -20,7 +20,7 @@
         [Test]
         public void CheckAllTheStatistics()
         {
-            var employee = new Employee("Franek", "Dzbanek", 45);
+            var employee = new Employee("Franek", "Dzbanek", 45, 'S');
             employee.AddGrade(3.5f);
             employee.AddGrade(34.5f);
             employee.AddGrade(43.5f);
@@ -40,7 +40,7 @@
         [Test]
         public void CheckCharGradesValue()
         {
-            var employee = new Employee("Franek", "Dzbanek", 45);
+            var employee = new Employee("Franek", "Dzbanek", 45, 'S');
             employee.AddGrade('d');
 
             var result = employee.GetStatistics();
@@ -51,7 +51,7 @@
         [Test]
         public void CheckCharGradesAverageValue()
         {
-            var employee = new Employee("Franek", "Dzbanek", 45);
+            var employee = new Employee("Franek", "Dzbanek", 45, 'S');
             employee.AddGrade(80.4f);
 
             var result = employee.GetStatistics();

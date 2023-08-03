@@ -7,6 +7,8 @@
 
         private List<float> grades = new List<float>();
 
+        public event EmployeeBase.GradeAddedDelegate GradeAdded;
+
         public Supervisor() 
         { 
         }
@@ -66,7 +68,6 @@
 
                 sign = "-";
 
-                Console.WriteLine(grade);
 
                 if (float.TryParse(grade, out float result))
                 {
@@ -113,11 +114,6 @@
         }
 
         public void AddGrade(double grade)
-        {
-            this.AddGrade((float)grade);
-        }
-
-        public void AddGrade(long grade)
         {
             this.AddGrade((float)grade);
         }

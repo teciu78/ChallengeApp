@@ -9,6 +9,8 @@
 
         public bool result = false;
 
+        public event EmployeeBase.GradeAddedDelegate GradeAdded;
+
         public Employee(string? name, string? surname, int? age, char sex) 
             //: base(name, surname, age, sex)
         {
