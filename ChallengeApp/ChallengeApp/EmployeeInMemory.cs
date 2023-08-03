@@ -1,35 +1,15 @@
 ﻿namespace ChallengeApp
 {
-    public class Employee : IEmployee //Person
+    public class EmployeeInMemory : EmployeeBase
     {
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-
         private List<float> grades = new List<float>();
 
-        public bool result = false;
-
-        public Employee(string? name, string? surname, int? age, char sex) 
-            //: base(name, surname, age, sex)
+        public EmployeeInMemory(string name, string surname) 
+            : base(name, surname)
         {
-            this.Name = name;
-            this.Surname = surname;
         }
 
-        public void AddGrade(float grade)
-        {
-       
-            if (grade >= -100 && grade <= 100)
-            {
-                this.grades.Add(grade);
-            }
-            else
-            {
-                throw new Exception($"\nPodana wartość ({grade}) jest nieprawidłowa. Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.\n");
-            }
-        }
-
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
             {
@@ -41,18 +21,30 @@
             }
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(float grade)
+        {
+            if (grade >= -100 && grade <= 100)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                throw new Exception($"\nPodana wartość ({grade}) jest nieprawidłowa. Podaj liczbę zmiennoprzecinkową w zakresie od -100 do 100.\n");
+            }
+        }
+
+        public override void AddGrade(int grade)
         {
             float gradeAsFloat = (float)grade;
             this.AddGrade(gradeAsFloat);
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             this.AddGrade((float)grade);
         }
-        
-        public void AddGrade(char grade)
+
+        public override void AddGrade(char grade)
         {
             switch (grade)
             {
@@ -81,7 +73,7 @@
             }
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics()
             {
@@ -89,7 +81,7 @@
                 Max = float.MinValue,
                 Min = float.MaxValue,
                 Sum = 0
-            }; 
+            };
 
             foreach (var grade in this.grades)
             {
@@ -119,7 +111,6 @@
                     statistics.AverageLetter = 'E';
                     break;
             }
-
             return statistics;
         }
     }

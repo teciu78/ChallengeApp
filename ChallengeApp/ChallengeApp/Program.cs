@@ -1,46 +1,39 @@
 ﻿using ChallengeApp;
 
 Console.WriteLine("\nWitamy w programie ChallengeApp do oceny pracowników");
-Console.WriteLine("----------------------------------------------------\n");
+Console.WriteLine("----------------------------------------------------");
 
-//var employee = new Employee("Franek", "Dzbanek", 45, 'M');
+var employee = new EmployeeInFile("Franek", "Dzbanek");
 
-var supervisor = new Supervisor();
-var suma = supervisor.GetStatistics();
-var score = "4-";
+while (true)
+{
+    Console.WriteLine("\nPodaj kolejną ocenę pracownika:");
+    var input = Console.ReadLine();
+    {
+        if (input == "q" || input == "Q")
+            break;
+    }
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
 
-supervisor.AddGrade(score);
+var statistics = employee.GetStatistics();
 
-Console.WriteLine(suma.Sum);
-
-//while (true)
-//{
-//    Console.WriteLine("Podaj kolejną ocenę pracownika:");
-//    var input = Console.ReadLine();
-//    {
-//        if (input == "q" || input == "Q")
-//        break;
-//    }
-//    try
-//    {
-//        employee.AddGrade(input);
-//    }
-//    catch(Exception ex)
-//    {
-//        Console.WriteLine(ex.Message);
-//    }
-//}
-
-//    var statistics1 = employee.GetStatistics();
-
-//if (!float.IsNaN(statistics1.Average))
-//{
-//    Console.WriteLine($"\nAverage: {statistics1.Average}");
-//    Console.WriteLine($"Min: {statistics1.Min}");
-//    Console.WriteLine($"Max: {statistics1.Max}");
-//}
-//else
-//{
-//    Console.WriteLine("\nNie zostały wprowadzone żadne dane\n");
-//}
+if (!float.IsNaN(statistics.Average))
+{
+    Console.WriteLine($"\nPracownik zdobył łącznie: {statistics.Sum:N2} punktów.");
+    Console.WriteLine($"\nAverage: {statistics.Average:N2}");
+    Console.WriteLine($"Min: {statistics.Min:N2}");
+    Console.WriteLine($"Max: {statistics.Max:N2}");
+}
+else
+{
+    Console.WriteLine("\nNie zostały wprowadzone żadne dane\n");
+}
 
