@@ -39,11 +39,6 @@ namespace ChallengeApp
                     {
                         writer.WriteLine(grade);
                     }
-
-                    if (GradeAdded != null)
-                    {
-                        GradeAdded(this, new EventArgs());
-                    }
                 }
                 catch (Exception e)
                 {

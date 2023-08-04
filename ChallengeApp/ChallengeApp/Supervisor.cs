@@ -125,20 +125,11 @@
 
         public Statistics GetStatistics()
         {
-            var statistics = new Statistics()
-            {
-                Average = 0,
-                Max = float.MinValue,
-                Min = float.MaxValue,
-                Sum = 0
-            };
+            var statistics = new Statistics();
 
             foreach (var grade in this.grades)
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-                statistics.Sum += grade;
+                statistics.AddGrade(grade);
             }
             return statistics;
         }
